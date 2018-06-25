@@ -5,12 +5,38 @@
 
 // Dependencies
 var http = require('http');
+var https = require('https');
 var url = require('url');
 var StringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
+var fs = require('fs');
 
-// The server should respond to all requests with a string
-var server = http.createServer(function(req, res) {
+// HTTP server
+var httpServer = http.createServer(function(req, res) {
+  unifiedServer(req, res);
+});
+
+// Start the HTTP server
+httpServer.listen(config.httpPort, function() {
+  console.log('Server is listening on port '+config.httpPort);
+});
+
+// HTTPS server
+var httpsServerOptions = {
+  'key' : fs.readFileSync('./https/key.pem'),
+  'cert' : fs.readFileSync('./https/cert.pem')
+};
+var httpsServer = https.createServer(httpsServerOptions, function(req, res) {
+  unifiedServer(req, res);
+});
+
+// Start HTTPS server
+httpsServer.listen(config.httpsPort, function() {
+  console.log('Server is listening on port '+config.httpsPort);
+});
+
+// All the server logic for http(s)
+var unifiedServer = function(req, res) {
 
   // Get the url and parse it
   var parsedUrl = url.parse(req.url, true);
@@ -70,21 +96,16 @@ var server = http.createServer(function(req, res) {
     });
 
   });
-});
 
-// Start the server
-server.listen(config.port, function() {
-  console.log('Server is listening on port '+config.port+' in environment '+config.envName);
-});
+};
 
 // Define the handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback) {
-  // Callback a http status code and a payload object
-  callback(406, {'name' : 'My name sample handler'});
-};
+// Ping handler
+handlers.ping = function(data, callback) {
+  callback(200);
+}
 
 // Not found handler
 handlers.notFound = function(data, callback) {
@@ -93,5 +114,5 @@ handlers.notFound = function(data, callback) {
 
 // Define a request router
 var router = {
-  'sample' : handlers.sample
+  'ping' : handlers.ping
 };

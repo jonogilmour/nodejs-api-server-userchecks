@@ -9,14 +9,16 @@ var environments = {};
 environments.staging = {
   'httpPort' : 3000,
   'httpsPort' : 3001,
-  'envName' : 'staging'
+  'envName' : 'staging',
+  'hashingSecret' : 'thisisasecret'
 };
 
 // Production env
 environments.production = {
   'httpPort' : 5000,
   'httpsPort' : 5001,
-  'envName' : 'production'
+  'envName' : 'production',
+  'hashingSecret' : 'thisisanothersecret'
 };
 
 // Determine which env to export based on environment variable

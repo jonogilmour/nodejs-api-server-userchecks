@@ -116,5 +116,6 @@ handlers.notFound = function(data, callback) {
 
 // Define a request router
 var router = {
-  'ping' : handlers.ping
+  'ping' : handlers.ping,
+  'users' : handlers.users
 };

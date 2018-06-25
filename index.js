@@ -72,9 +72,9 @@ var server = http.createServer(function(req, res) {
   });
 });
 
-// Start the server and listen on port 3000
-server.listen(3000, function() {
-  console.log('Server is listening on port 3000');
+// Start the server
+server.listen(config.port, function() {
+  console.log('Server is listening on port '+config.port+' in environment '+config.envName);
 });
 
 // Define the handlers

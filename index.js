@@ -16,7 +16,7 @@ app.init = function() {
   server.init();
 
   // Start workers
-  workers.init();
+  // workers.init();
 };
 
 // Execute

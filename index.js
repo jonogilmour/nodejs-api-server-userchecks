@@ -8,6 +8,9 @@ const server = require('./lib/server');
 const workers = require('./lib/workers');
 const _data = require('./lib/data');
 
+_data.list('tokens', (err, data) => {
+  console.log(err, data);
+});
 _data.create('test', 'test1.txt', 'This is a test', (err) => {
   if(!err) {
     _data.read('test', 'test1.txt', (err, data) => {

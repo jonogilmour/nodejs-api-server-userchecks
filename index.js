@@ -6,6 +6,8 @@
 // Dependencies
 const server = require('./lib/server');
 const workers = require('./lib/workers');
+const logs = require('./lib/logs');
+
 
 // Declare the app
 const app = {};

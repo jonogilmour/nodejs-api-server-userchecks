@@ -1,5 +1,7 @@
 # NodeJS API Server
 
+Based on the Pirple NodeJS Masterclass.
+
 Pure NodeJS API server with zero modules or frameworks. This is a simple app, probably not suitable in production without modification.
 
 ## To Start
